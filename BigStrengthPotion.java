@@ -1,10 +1,10 @@
 public class BigStrengthPotion extends Potion {
 
-    private double bonusDamage;
+    private final double bonusDamage;
 
     public BigStrengthPotion() {
         super(30);
-        bonusDamage = 12;
+        bonusDamage = 25;
     }
 
     @Override
@@ -12,11 +12,14 @@ public class BigStrengthPotion extends Potion {
 
         target.power += bonusDamage;
 
-        System.out.println("Big strength potion used.");
+        System.out.println("Big strength potion used. +25 bonus damage");
     }
 
     @Override
     public String toString() {
         return "BigStrengthPotion";
     }
+    public double getBonusDamage() {
+    return this.bonusDamage;
+}
 }

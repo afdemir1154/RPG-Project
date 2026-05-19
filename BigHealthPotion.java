@@ -1,6 +1,6 @@
 public class BigHealthPotion extends Potion {
 
-    private int healAmount;
+    private final int healAmount;
 
     public BigHealthPotion() {
         super(25);
@@ -12,11 +12,14 @@ public class BigHealthPotion extends Potion {
 
         target.health += healAmount;
 
-        System.out.println("Big health potion used.");
+        System.out.println("Big health potion used. 50 HP restored");
     }
 
     @Override
     public String toString() {
         return "BigHealthPotion";
     }
+    public int getHealAmount() {
+    return this.healAmount;
+}
 }

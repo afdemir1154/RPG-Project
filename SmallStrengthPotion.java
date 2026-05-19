@@ -1,10 +1,10 @@
 public class SmallStrengthPotion extends Potion {
 
-    private double bonusDamage;
+    private final double bonusDamage;
 
     public SmallStrengthPotion() {
         super(15);
-        bonusDamage = 5;
+        bonusDamage = 10;
     }
 
     @Override
@@ -12,11 +12,14 @@ public class SmallStrengthPotion extends Potion {
 
         target.power += bonusDamage;
 
-        System.out.println("Small strength potion used.");
+        System.out.println("Small strength potion used. +10 bonus damage");
     }
 
     @Override
     public String toString() {
         return "SmallStrengthPotion";
     }
+    public double getBonusDamage() {
+    return this.bonusDamage;
+}
 }

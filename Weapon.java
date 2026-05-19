@@ -19,17 +19,32 @@ public abstract class Weapon implements Equipable, Tradeable {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + price;
+        long temp;
+        temp = Double.doubleToLongBits(bonusDamage);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 
+    @Override
+    public boolean equals(Object obj) {
         if (this == obj)
             return true;
-
-        if (obj == null || getClass() != obj.getClass())
+        if (obj == null)
             return false;
-
-        Weapon weapon = (Weapon) obj;
-
-        return price == weapon.price &&
-                bonusDamage == weapon.bonusDamage;
+        if (getClass() != obj.getClass())
+            return false;
+        Weapon other = (Weapon) obj;
+        if (price != other.price)
+            return false;
+        if (Double.doubleToLongBits(bonusDamage) != Double.doubleToLongBits(other.bonusDamage))
+            return false;
+        return true;
     }
+ public double getBonusDamage() {
+    return this.bonusDamage;
+}
 }

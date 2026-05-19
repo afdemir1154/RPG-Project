@@ -9,7 +9,7 @@ public class GM {
     private int wave = 1; 
 
     public GM() {
-        this.hero = new Hero("Funda", 100, 15.0, 50, 100);
+        this.hero = new Hero("FF", 100, 15.0, 50, 100);
         this.shop = new Shop();
         this.currentEnemies = new ArrayList<>();
         this.scanner = new Scanner(System.in);
@@ -66,8 +66,13 @@ public class GM {
     }
 
     public void heroTurn() {
-        System.out.println("\nYour Turn!");
-        handleMenuInput(); 
+        boolean actionTaken = false;
+        
+        // Geçerli bir hamle yapılana kadar menüyü tekrar göster
+        while (!actionTaken) {
+            System.out.println("\nYour Turn!");
+            actionTaken = handleMenuInput(); 
+        }
     }
 
     public void enemyTurn() {
@@ -81,12 +86,12 @@ public class GM {
         }
     }
 
-    public void handleMenuInput() {
-        System.out.println("What Would You Like To Do?");
+    public boolean handleMenuInput() {
+        System.out.println("What would you like to do?");
         System.out.println("1. Attack");
-        System.out.println("2. Open Inventory");
-        System.out.println("3. Visit The Shop");
-        System.out.println("Your Choice: ");
+        System.out.println("2. Use Item / Equip Weapon (Inventory)");
+        System.out.println("3. Go to Shop");
+        System.out.print("Your choice: ");
 
         String choice = scanner.nextLine().trim();
 
@@ -94,65 +99,68 @@ public class GM {
             case "1":
                 try {
                     if (currentEnemies.isEmpty()) {
-                        throw new DeadCharacterException("There Are No Foes To Attack!");
+                        throw new DeadCharacterException("There are no alive enemies left to attack!");
                     }
                     Foe target = currentEnemies.get(0);
-                    System.out.println("\n" + hero.getName() + " approaches and attacks to " + target.toString() + " vigorously! ");
+                    System.out.println("\n" + hero.getName() + " charges and attacks " + target.toString() + "!");
                     hero.attack(target);
                     
                     if (!target.isAlive()) {
-                        System.out.println(target.toString() + " is dead meat! " + target.getReward() + " coins looted.");
+                        System.out.println(target.toString() + " is dead! You earned " + target.getReward() + " coins.");
                         hero.addCoin(target.getReward());
                         currentEnemies.remove(target);
                     }
+                    return true;
+
                 } catch (DeadCharacterException e) {
-                    System.out.println("Dead Character Error: " + e.getMessage());
+                    System.out.println("Game State Error: " + e.getMessage());
+                    return false;
                 }
-                break;
 
             case "2":
-                openInventoryMenu();
-                break;
+                return openInventoryMenu(); 
 
             case "3":
                 openShopMenu();
-                break;
+                return false; 
 
             default:
-                System.out.println("Invalid selection! You lost your turn due to carelessness.");
-                break;
+                System.out.println("Invalid choice, please try again.");
+                return false; 
         }
     }
 
-    private void openInventoryMenu() {
+    private boolean openInventoryMenu() {
         System.out.println("\n--- HERO'S INVENTORY ---");
         hero.getInventory().displayItems();
-        System.out.print("Select item number to equip (0 to Exit):  ");
+        System.out.print("Enter the number of the item to use/equip (0 to exit): ");
         
-       
         try {
             int itemChoice = Integer.parseInt(scanner.nextLine().trim());
-            if (itemChoice == 0) return;
+            if (itemChoice == 0) return false;
 
             ArrayList<Tradeable> items = hero.getInventory().getItems();
             if (itemChoice < 1 || itemChoice > items.size()) {
                 System.out.println("Invalid inventory number!");
-                return;
+                return false;
             }
 
             Tradeable chosenItem = items.get(itemChoice - 1);
 
-           
             if (chosenItem instanceof Usable) {
                 Usable potion = (Usable) chosenItem;
                 hero.useItem(potion, hero);
-                hero.getInventory().removeItem(chosenItem); // İksir kullanildiktan sonra tuketilir
+                hero.getInventory().removeItem(chosenItem);
             } else if (chosenItem instanceof Equipable) {
                 Equipable weapon = (Equipable) chosenItem;
                 hero.equipWeapon(weapon);
             }
+            
+            return false; 
+
         } catch (NumberFormatException e) {
-            System.out.println("Input Error: Please enter a valid menu number!");
+            System.out.println("Input Error: Please enter a valid NUMBER from the menu!");
+            return false;
         }
     }
 

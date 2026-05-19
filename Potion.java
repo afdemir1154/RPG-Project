@@ -10,4 +10,5 @@ public abstract class Potion implements Usable, Tradeable {
     public int getPrice() {
         return price;
     }
+
 }
