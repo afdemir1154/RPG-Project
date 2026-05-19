@@ -166,6 +166,10 @@ public class GM {
                 hero.equipWeapon(weapon);
             }
             
+            System.out.println("\n--- Updated Status ---");
+            System.out.println(hero.toString());
+
+            
             return false; 
 
         } catch (NumberFormatException e) {
