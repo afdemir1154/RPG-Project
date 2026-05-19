@@ -34,16 +34,23 @@ public class Hero extends Entity {
 
     public void equipWeapon(Equipable weapon) {
         if (weapon instanceof Weapon weapon1) {
-            // Eğer elde halihazırda bir silah varsa, önce onun hasarını çıkart
+            
+            // 1. Eğer elde halihazırda bir silah varsa, gücünü çıkar ve çantaya (envantere) geri koy
             if (this.equippedWeapon != null) {
                 this.power -= this.equippedWeapon.getBonusDamage();
+                this.inventory.addItem(this.equippedWeapon);
+                System.out.println(this.equippedWeapon + " unequipped and returned to inventory.");
             }
             
-            equippedWeapon = weapon1;
+            // 2. Yeni silahı kuşan ve gücünü ekle
+            this.equippedWeapon = weapon1;
             weapon.equip();
-            // Yeni silahın hasarını güce ekle
-            this.power += equippedWeapon.getBonusDamage();
-            System.out.println(equippedWeapon + " equipped! New Power: " + this.power);
+            this.power += this.equippedWeapon.getBonusDamage();
+            
+            // 3. Yeni kuşanılan silahı çantadan sil (çünkü artık karakterin elinde)
+            this.inventory.removeItem(weapon1);
+            
+            System.out.println(this.equippedWeapon + " equipped! New Power: " + this.power);
         }
     }
 
