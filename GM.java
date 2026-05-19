@@ -21,48 +21,56 @@ public class GM {
     }
 
     public void startGame() {
-        boolean isGameOver = false;
-
-        while (!isGameOver) {
-            System.out.println("\n--- (Wave " + wave + ") ---");
-            System.out.println(hero.toString());
-
-            heroTurn();
-
-            // Eğer dusman olduyse sonraki dusmani getir
-            if (currentEnemies.isEmpty() && wave < 5) {
-                wave++;
-                if (wave == 2) {
-                    System.out.println("\n!!! : A ghoul appeared !!!");
-                    currentEnemies.add(new Ghoul());
-                } else if (wave == 3) {
-                    System.out.println("\n!!! : A witch is approaching !!!");
-                    currentEnemies.add(new Witch());
-                } else if (wave == 4) {
-                    System.out.println("\n!!! : IS THAT A CYCLOPS??? !!!");
-                    currentEnemies.add(new Cyclops());
-                } else if(wave == 5) {
-                    System.out.println("!!! : Medusa... !!!");
-                    currentEnemies.add(new Medusa());
+        try (scanner) {
+            boolean isGameOver = false;
+            
+            while (!isGameOver) {
+                System.out.println("\n--- (Wave " + wave + ") ---");
+                System.out.println(hero.toString());
+                
+                heroTurn();
+                
+                // Eğer dusman olduyse sonraki dusmani getir
+                if (currentEnemies.isEmpty() && wave < 5) {
+                    wave++;
+                    switch (wave) {
+                        case 2 -> {
+                            System.out.println("\n!!! : A ghoul appeared !!!");
+                            currentEnemies.add(new Ghoul());
+                        }
+                        case 3 -> {
+                            System.out.println("\n!!! : A witch is approaching !!!");
+                            currentEnemies.add(new Witch());
+                        }
+                        case 4 -> {
+                            System.out.println("\n!!! : IS THAT A CYCLOPS??? !!!");
+                            currentEnemies.add(new Cyclops());
+                        }
+                        case 5 -> {
+                            System.out.println("!!! : Medusa... !!!");
+                            currentEnemies.add(new Medusa());
+                        }
+                        default -> {
+                        }
+                    }
+                }
+                
+                if (hero.isAlive() && !currentEnemies.isEmpty()) {
+                    enemyTurn();
+                }
+                
+                if (!hero.isAlive()) {
+                    gameOver();
+                    isGameOver = true;
+                } else if (currentEnemies.isEmpty() && wave >= 5) {
+                    System.out.println("\n=================================================");
+                    System.out.println("You Saved The Kingdom!");
+                    System.out.println("Your Final Score: " + hero.getCoinTotal());
+                    System.out.println("=================================================");
+                    isGameOver = true;
                 }
             }
-
-            if (hero.isAlive() && !currentEnemies.isEmpty()) {
-                enemyTurn();
-            }
-
-            if (!hero.isAlive()) {
-                gameOver();
-                isGameOver = true;
-            } else if (currentEnemies.isEmpty() && wave >= 5) {
-                System.out.println("\n=================================================");
-                System.out.println("You Saved The Kingdom!");
-                System.out.println("Your Final Score: " + hero.getCoinTotal());
-                System.out.println("=================================================");
-                isGameOver = true;
-            }
         }
-        scanner.close();
     }
 
     public void heroTurn() {
@@ -96,7 +104,7 @@ public class GM {
         String choice = scanner.nextLine().trim();
 
         switch (choice) {
-            case "1":
+            case "1" -> {
                 try {
                     if (currentEnemies.isEmpty()) {
                         throw new DeadCharacterException("There are no alive enemies left to attack!");
@@ -116,17 +124,21 @@ public class GM {
                     System.out.println("Game State Error: " + e.getMessage());
                     return false;
                 }
+            }
 
-            case "2":
+            case "2" -> {
                 return openInventoryMenu(); 
+            }
 
-            case "3":
+            case "3" -> {
                 openShopMenu();
                 return false; 
+            }
 
-            default:
+            default -> {
                 System.out.println("Invalid choice, please try again.");
                 return false; 
+            }
         }
     }
 
@@ -147,12 +159,10 @@ public class GM {
 
             Tradeable chosenItem = items.get(itemChoice - 1);
 
-            if (chosenItem instanceof Usable) {
-                Usable potion = (Usable) chosenItem;
+            if (chosenItem instanceof Usable potion) {
                 hero.useItem(potion, hero);
                 hero.getInventory().removeItem(chosenItem);
-            } else if (chosenItem instanceof Equipable) {
-                Equipable weapon = (Equipable) chosenItem;
+            } else if (chosenItem instanceof Equipable weapon) {
                 hero.equipWeapon(weapon);
             }
             

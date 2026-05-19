@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Inventory {
 
-    private ArrayList<Tradeable> items;
+    private final ArrayList<Tradeable> items;
 
     public Inventory() {
         items = new ArrayList<>();

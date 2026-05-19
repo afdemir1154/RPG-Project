@@ -40,9 +40,7 @@ public abstract class Weapon implements Equipable, Tradeable {
         Weapon other = (Weapon) obj;
         if (price != other.price)
             return false;
-        if (Double.doubleToLongBits(bonusDamage) != Double.doubleToLongBits(other.bonusDamage))
-            return false;
-        return true;
+        return Double.doubleToLongBits(bonusDamage) == Double.doubleToLongBits(other.bonusDamage);
     }
  public double getBonusDamage() {
     return this.bonusDamage;

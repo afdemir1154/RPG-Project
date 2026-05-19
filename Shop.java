@@ -28,7 +28,7 @@ public class Shop {
             hero.spendCoin(item.getPrice());
             hero.getInventory().addItem(item);
             stock.remove(item); 
-            System.out.println(item.toString() + " successfully purchased and added to your inventory!");
+            System.out.println("\n" + item.toString() + " successfully purchased and added to your inventory!");
         } else {
             throw new InsufficientCoinException("Insufficient Coins! " + item.toString() + " costs: " + item.getPrice() + " Coins. ");
         }
@@ -43,29 +43,28 @@ public void displayShop() {
     
     for (int i = 0; i < stock.size(); i++) {
         Tradeable item = stock.get(i);
+        if (item == null) {
+                continue; 
+            }
+        
         String statInfo = "";
 
         // 1. Eşya bir Silah ise (Dagger, Longsword, BattleAxe)
-        if (item instanceof Weapon) {
-            Weapon weapon = (Weapon) item;
+        if (item instanceof Weapon weapon) {
             statInfo = " [Damage: +" + weapon.getBonusDamage() + "]"; 
         } 
         // 2. Eşya Can İksiri ise (SmallHealthPotion, BigHealthPotion)
-        else if (item instanceof SmallHealthPotion) {
-            SmallHealthPotion hpPotion = (SmallHealthPotion) item;
+        else if (item instanceof SmallHealthPotion hpPotion) {
             statInfo = " [Heal: +" + hpPotion.getHealAmount() + " HP]"; 
         } 
-        else if (item instanceof BigHealthPotion) {
-            BigHealthPotion hpPotion = (BigHealthPotion) item;
+        else if (item instanceof BigHealthPotion hpPotion) {
             statInfo = " [Heal: +" + hpPotion.getHealAmount() + " HP]";
         }
         // 3. Eşya Güç İksiri ise (SmallStrengthPotion, BigStrengthPotion)
-        else if (item instanceof SmallStrengthPotion) {
-            SmallStrengthPotion strPotion = (SmallStrengthPotion) item;
+        else if (item instanceof SmallStrengthPotion strPotion) {
             statInfo = " [Str Boost: +" + strPotion.getBonusDamage() + "]"; 
         }
-        else if (item instanceof BigStrengthPotion) {
-            BigStrengthPotion strPotion = (BigStrengthPotion) item;
+        else if (item instanceof BigStrengthPotion strPotion) {
             statInfo = " [Str Boost: +" + strPotion.getBonusDamage() + "]";
         }
 

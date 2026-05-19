@@ -33,8 +33,8 @@ public class Hero extends Entity {
     }
 
     public void equipWeapon(Equipable weapon) {
-        if (weapon instanceof Weapon) {
-            equippedWeapon = (Weapon) weapon;
+        if (weapon instanceof Weapon weapon1) {
+            equippedWeapon = weapon1;
             weapon.equip();
             // Silahın hasarını güce ekle
             this.power += equippedWeapon.bonusDamage;
