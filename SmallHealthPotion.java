@@ -9,10 +9,17 @@ public class SmallHealthPotion extends Potion {
 
     @Override
     public void use(Entity target) {
-
-        target.health += healAmount;
-
-        System.out.println("Small health potion used. 20 HP restored");
+        if (target == null) {
+            return; 
+        }
+        
+        if (target instanceof Hero hero) {
+            // Hero sınıfındaki setHealth, maxHealth sınırını otomatik kontrol eder
+            hero.setHealth(hero.getHealth() + healAmount);
+        } else {
+            target.health += healAmount;
+        }
+        System.out.println(this.toString() + " used. " + healAmount + " HP restored.");
     }
 
     @Override
