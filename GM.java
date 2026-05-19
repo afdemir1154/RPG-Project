@@ -2,11 +2,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GM {
-    private Hero hero;
-    private Shop shop;
-    private ArrayList<Foe> currentEnemies;
-    private Scanner scanner;
-    private int wave = 1; // 3 Farkli karsilasma takibi icin
+    private final Hero hero;
+    private final Shop shop;
+    private final ArrayList<Foe> currentEnemies;
+    private final Scanner scanner;
+    private int wave = 1; 
 
     public GM() {
         this.hero = new Hero("Funda", 100, 15.0, 50, 100);

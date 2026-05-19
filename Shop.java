@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Shop {
 
-    private ArrayList<Tradeable> stock;
+    private final ArrayList<Tradeable> stock;
 
     public Shop() {
         stock = new ArrayList<>();
@@ -12,6 +12,7 @@ public class Shop {
         stock.add(new SmallStrengthPotion());
         stock.add(new Dagger());
         stock.add(new Longsword());
+        stock.add(new BattleAxe());
     }
 
    
