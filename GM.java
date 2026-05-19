@@ -28,46 +28,50 @@ public class GM {
                 System.out.println("\n--- (Wave " + wave + ") ---");
                 System.out.println(hero.toString());
                 
+                // 1. KAHRAMANIN TURU
                 heroTurn();
                 
-                // Eğer dusman olduyse sonraki dusmani getir
-                if (currentEnemies.isEmpty() && wave < 5) {
-                    wave++;
-                    switch (wave) {
-                        case 2 -> {
-                            System.out.println("\n!!! : A ghoul appeared !!!");
-                            currentEnemies.add(new Ghoul());
-                        }
-                        case 3 -> {
-                            System.out.println("\n!!! : A witch is approaching !!!");
-                            currentEnemies.add(new Witch());
-                        }
-                        case 4 -> {
-                            System.out.println("\n!!! : IS THAT A CYCLOPS??? !!!");
-                            currentEnemies.add(new Cyclops());
-                        }
-                        case 5 -> {
-                            System.out.println("!!! : Medusa... !!!");
-                            currentEnemies.add(new Medusa());
-                        }
-                        default -> {
-                        }
-                    }
-                }
-                
+                // 2. DÜŞMANIN TURU (Eğer kahraman hayattaysa ve listede hala canlı düşman varsa)
                 if (hero.isAlive() && !currentEnemies.isEmpty()) {
                     enemyTurn();
                 }
                 
+                // 3. OYUN SONU VEYA YENİ DALGA KONTROLLERİ
                 if (!hero.isAlive()) {
                     gameOver();
                     isGameOver = true;
-                } else if (currentEnemies.isEmpty() && wave >= 5) {
-                    System.out.println("\n=================================================");
-                    System.out.println("You Saved The Kingdom!");
-                    System.out.println("Your Final Score: " + hero.getCoinTotal());
-                    System.out.println("=================================================");
-                    isGameOver = true;
+                } else if (currentEnemies.isEmpty()) {
+                    // Eğer tüm düşmanlar öldüyse ve son dalgada değilsek yeni dalgayı getir
+                    if (wave < 5) {
+                        wave++;
+                        switch (wave) {
+                            case 2 -> {
+                                System.out.println("\n!!! : A ghoul appeared !!!");
+                                currentEnemies.add(new Ghoul());
+                            }
+                            case 3 -> {
+                                System.out.println("\n!!! : A witch is approaching !!!");
+                                currentEnemies.add(new Witch());
+                            }
+                            case 4 -> {
+                                System.out.println("\n!!! : IS THAT A CYCLOPS??? !!!");
+                                currentEnemies.add(new Cyclops());
+                            }
+                            case 5 -> {
+                                System.out.println("!!! : Medusa... !!!");
+                                currentEnemies.add(new Medusa());
+                            }
+                            default -> {
+                            }
+                        }
+                    } else {
+                        // Dalga 5 bittiyse ve düşman kalmadıysa oyunu kazan
+                        System.out.println("\n=================================================");
+                        System.out.println("You Saved The Kingdom!");
+                        System.out.println("Your Final Score: " + hero.getCoinTotal());
+                        System.out.println("=================================================");
+                        isGameOver = true;
+                    }
                 }
             }
         }

@@ -7,10 +7,12 @@ public class Shop {
     public Shop() {
         stock = new ArrayList<>();
         
-        stock.add(new SmallHealthPotion());
-        stock.add(new BigHealthPotion());
-        stock.add(new SmallStrengthPotion());
-        stock.add(new BigStrengthPotion());
+        for (int i = 0; i < 3; i++) {
+            stock.add(new SmallHealthPotion());
+            stock.add(new BigHealthPotion());
+            stock.add(new SmallStrengthPotion());
+            stock.add(new BigStrengthPotion());
+        }
         stock.add(new Dagger());
         stock.add(new Longsword());
         stock.add(new BattleAxe());

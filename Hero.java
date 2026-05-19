@@ -17,7 +17,13 @@ public class Hero extends Entity {
     @Override
     public void takeDamage(int amount) {
         super.takeDamage(amount); 
-        System.out.println(this.name + " took damage! Current HP: " + this.health + "/" + this.maxHealth);
+
+        if (amount > 0) {
+            System.out.println(this.name + " took damage! Current HP: " + this.health + "/" + this.maxHealth);
+        }
+        else {
+            System.out.println(this.name + " took no damage! Current HP: " + this.health + "/" + this.maxHealth);
+        }
     }
 
     public boolean spendCoin(int amount) {
