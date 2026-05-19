@@ -32,7 +32,7 @@ public abstract class Entity {
             System.out.println("MISS");
         }
 
-        System.out.println(" " + this.name + "dealt" + finalDamage + "to" + target.name);
+        System.out.println(" " + this.name + " dealt " + finalDamage + " damage to " + target.name);
         
         target.takeDamage(finalDamage);
     }

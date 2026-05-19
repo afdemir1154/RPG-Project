@@ -15,13 +15,13 @@ public class GM {
         this.scanner = new Scanner(System.in);
 
         // İlk dusman
+        System.out.println("Your Adventure Has Begun!");
         System.out.println("\n!!! : A measly goblin stops you !!!");
         currentEnemies.add(new Goblin());
     }
 
     public void startGame() {
         boolean isGameOver = false;
-        System.out.println("Your Adventure Has Begun!");
 
         while (!isGameOver) {
             System.out.println("\n--- (Wave " + wave + ") ---");
@@ -97,7 +97,7 @@ public class GM {
                         throw new DeadCharacterException("There Are No Foes To Attack!");
                     }
                     Foe target = currentEnemies.get(0);
-                    System.out.println("\n" + hero.getName() + " approaches and " + target.toString() + " attacks vigorously!");
+                    System.out.println("\n" + hero.getName() + " approaches and attacks to " + target.toString() + " vigorously! ");
                     hero.attack(target);
                     
                     if (!target.isAlive()) {
