@@ -1,6 +1,6 @@
 public abstract class Foe extends Entity {
 
-    public Foe(String name, int health, int power) {
+    public Foe(String name, int health, double power) {
         super(name, health, power);
     }
 
