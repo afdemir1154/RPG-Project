@@ -31,8 +31,6 @@ public abstract class Entity {
             finalDamage = 0;
             System.out.println("MISS");
         }
-
-        System.out.println("" + this.name + " dealt " + finalDamage + " damage to " + target.name);
         
         target.takeDamage(finalDamage);
     }

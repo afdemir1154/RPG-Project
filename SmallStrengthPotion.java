@@ -12,12 +12,12 @@ public class SmallStrengthPotion extends Potion {
 
         target.power += bonusDamage;
 
-        System.out.println("Small strength potion used. +10 bonus damage");
+        System.out.println("\n" + this.toString() + " used. " + bonusDamage + " extra damage");
     }
 
     @Override
     public String toString() {
-        return "SmallStrengthPotion";
+        return "Small Strength Potion";
     }
     public double getBonusDamage() {
     return this.bonusDamage;

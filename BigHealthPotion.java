@@ -14,17 +14,28 @@ public class BigHealthPotion extends Potion {
         }
         
         if (target instanceof Hero hero) {
-            // Hero sınıfındaki setHealth, maxHealth sınırını otomatik kontrol eder
             hero.setHealth(hero.getHealth() + healAmount);
-        } else {
+            if (hero.setHealth(hero.getHealth() + healAmount) != -1 && hero.setHealth(hero.getHealth() + healAmount) != 0) {
+                System.out.println("\n" + this.toString() + " used. " + hero.setHealth(hero.getHealth() + healAmount) + " HP restored.");
+            }
+            else if (hero.setHealth(hero.getHealth() + healAmount) == 0) {
+                System.out.println("\n HP is already full. " + this.toString() + " returned to the inventory");
+                hero.inventory.addItem(this);
+            } 
+            else {
+                System.out.println("\n" + this.toString() + " used. " + healAmount + " HP restored.");
+            }
+        } 
+        else {
             target.health += healAmount;
+            System.out.println("\n" + this.toString() + " used. " + healAmount + " HP restored.");
         }
-        System.out.println(this.toString() + " used. " + healAmount + " HP restored.");
     }
+
 
     @Override
     public String toString() {
-        return "BigHealthPotion";
+        return "Big Health Potion";
     }
     public int getHealAmount() {
     return this.healAmount;

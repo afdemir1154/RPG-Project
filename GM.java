@@ -9,14 +9,15 @@ public class GM {
     private int wave = 1; 
 
     public GM() {
-        this.hero = new Hero("FF", 100, 15.0, 50, 100);
+        this.hero = new Hero("FF", 100, 15.0, 50, 100, 15.0);
         this.shop = new Shop();
         this.currentEnemies = new ArrayList<>();
         this.scanner = new Scanner(System.in);
 
+
         // İlk dusman
-        System.out.println("Your Adventure Has Begun!");
-        System.out.println("\n!!! : A measly goblin stops you !!!");
+        System.out.println("----------- Your Adventure Has Begun! -----------");
+        System.out.println("\n!!! A measly goblin stops you !!!\n");
         currentEnemies.add(new Goblin());
     }
 
@@ -25,8 +26,8 @@ public class GM {
             boolean isGameOver = false;
             
             while (!isGameOver) {
-                System.out.println("\n--- (Wave " + wave + ") ---");
                 System.out.println(hero.toString());
+                System.out.println(currentEnemies.toString());
                 
                 // 1. KAHRAMANIN TURU
                 heroTurn();
@@ -36,7 +37,6 @@ public class GM {
                     enemyTurn();
                 }
                 
-                // 3. OYUN SONU VEYA YENİ DALGA KONTROLLERİ
                 if (!hero.isAlive()) {
                     gameOver();
                     isGameOver = true;
@@ -46,19 +46,19 @@ public class GM {
                         wave++;
                         switch (wave) {
                             case 2 -> {
-                                System.out.println("\n!!! : A ghoul appeared !!!");
+                                System.out.println("\n!!! A ghoul lurks in the dark !!!\n");
                                 currentEnemies.add(new Ghoul());
                             }
                             case 3 -> {
-                                System.out.println("\n!!! : A witch is approaching !!!");
+                                System.out.println("\n!!! A witch is approaching !!!\n");
                                 currentEnemies.add(new Witch());
                             }
                             case 4 -> {
-                                System.out.println("\n!!! : IS THAT A CYCLOPS??? !!!");
+                                System.out.println("\n!!! IS THAT A CYCLOPS??? !!!\n");
                                 currentEnemies.add(new Cyclops());
                             }
                             case 5 -> {
-                                System.out.println("!!! : Medusa... !!!");
+                                System.out.println("!!! Medusa... !!!\n");
                                 currentEnemies.add(new Medusa());
                             }
                             default -> {
@@ -77,10 +77,9 @@ public class GM {
         }
     }
 
-    public void heroTurn() {
+    public void heroTurn() { 
         boolean actionTaken = false;
         
-        // Geçerli bir hamle yapılana kadar menüyü tekrar göster
         while (!actionTaken) {
             System.out.println("\nYour Turn!");
             actionTaken = handleMenuInput(); 
@@ -88,12 +87,13 @@ public class GM {
     }
 
     public void enemyTurn() {
-        System.out.println("\nEnemy Turn!");
+        System.out.println("\n\nEnemy Turn!\n");
         
         for (Foe foe : currentEnemies) {
             if (foe.isAlive()) {
-                System.out.println(foe.toString() + " Attacks you!");
+                System.out.println(foe.name + " Attacks " + hero.name + "!");
                 foe.attack(hero);
+                System.out.println("-------------------------------------------------\n");
             }
         }
     }
@@ -114,13 +114,14 @@ public class GM {
                         throw new DeadCharacterException("There are no alive enemies left to attack!");
                     }
                     Foe target = currentEnemies.get(0);
-                    System.out.println("\n" + hero.getName() + " charges and attacks " + target.toString() + "!");
+                    System.out.println("\n" + hero.getName() + " charges and attacks " + target.name + "!");
                     hero.attack(target);
                     
                     if (!target.isAlive()) {
-                        System.out.println(target.toString() + " is dead! You earned " + target.getReward() + " coins.");
+                        System.out.println(target.name + " is dead! You earned " + target.getReward() + " coins.");
                         hero.addCoin(target.getReward());
                         currentEnemies.remove(target);
+                        System.out.println("\n-------------------------------------------------");
                     }
                     return true;
 
@@ -147,7 +148,7 @@ public class GM {
     }
 
     private boolean openInventoryMenu() {
-        System.out.println("\n--- HERO'S INVENTORY ---");
+        System.out.println("\n--- " + hero.name+"'S INVENTORY ---");
         hero.getInventory().displayItems();
         System.out.print("Enter the number of the item to use/equip (0 to exit): ");
         
@@ -172,6 +173,7 @@ public class GM {
             
             System.out.println("\n--- Updated Status ---");
             System.out.println(hero.toString());
+            System.out.println(currentEnemies.toString());
 
             
             return false; 

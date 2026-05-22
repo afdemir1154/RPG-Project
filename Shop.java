@@ -7,12 +7,18 @@ public class Shop {
     public Shop() {
         stock = new ArrayList<>();
         
-        for (int i = 0; i < 3; i++) {
-            stock.add(new SmallHealthPotion());
-            stock.add(new BigHealthPotion());
-            stock.add(new SmallStrengthPotion());
-            stock.add(new BigStrengthPotion());
-        }
+        stock.add(new SmallHealthPotion());
+        stock.add(new SmallHealthPotion());
+        stock.add(new SmallHealthPotion());
+        stock.add(new BigHealthPotion());
+        stock.add(new BigHealthPotion());
+        stock.add(new BigHealthPotion());
+        stock.add(new SmallStrengthPotion());
+        stock.add(new SmallStrengthPotion());
+        stock.add(new SmallStrengthPotion());
+        stock.add(new BigStrengthPotion());
+        stock.add(new BigStrengthPotion());
+        stock.add(new BigStrengthPotion());
         stock.add(new Dagger());
         stock.add(new Longsword());
         stock.add(new BattleAxe());
@@ -37,41 +43,45 @@ public class Shop {
     }
 
 public void displayShop() {
-    System.out.println("\n=== SHOP STOCK ===");
+    System.out.println("\n      SHOP STOCK                    EFFECT                          PRICE");
+    System.out.println(" ============================================================================== ");
     if (stock.isEmpty()) {
         System.out.println("Shop is empty!");
         return;
     }
-    
+
     for (int i = 0; i < stock.size(); i++) {
         Tradeable item = stock.get(i);
         if (item == null) {
-                continue; 
-            }
-        
+            continue;
+        }
+
         String statInfo = "";
 
         // 1. Eşya bir Silah ise (Dagger, Longsword, BattleAxe)
         if (item instanceof Weapon weapon) {
-            statInfo = " [Damage: +" + weapon.getBonusDamage() + "]"; 
-        } 
+            statInfo = "[Permanent Damage: +" + weapon.getBonusDamage() + "]";
+        }
         // 2. Eşya Can İksiri ise (SmallHealthPotion, BigHealthPotion)
         else if (item instanceof SmallHealthPotion hpPotion) {
-            statInfo = " [Heal: +" + hpPotion.getHealAmount() + " HP]"; 
-        } 
+            statInfo = "[Heal: +" + hpPotion.getHealAmount() + " HP]";
+        }
         else if (item instanceof BigHealthPotion hpPotion) {
-            statInfo = " [Heal: +" + hpPotion.getHealAmount() + " HP]";
+            statInfo = "[Heal: +" + hpPotion.getHealAmount() + " HP]";
         }
         // 3. Eşya Güç İksiri ise (SmallStrengthPotion, BigStrengthPotion)
         else if (item instanceof SmallStrengthPotion strPotion) {
-            statInfo = " [Str Boost: +" + strPotion.getBonusDamage() + "]"; 
+            statInfo = "[Damage: +" + strPotion.getBonusDamage() + "]";
         }
         else if (item instanceof BigStrengthPotion strPotion) {
-            statInfo = " [Str Boost: +" + strPotion.getBonusDamage() + "]";
+            statInfo = "[Damage: +" + strPotion.getBonusDamage() + "]";
         }
 
-        // Konsola fiyattan önce hasar/etki bilgisini de yazdırıyoruz
-        System.out.println((i + 1) + ". " + item.toString() + statInfo + " - Price: " + item.getPrice() + " Coin");
+        System.out.printf("%2d. %-27s %-29s  Price: %3d Coin\n", 
+                          (i + 1), 
+                          item.toString(), 
+                          statInfo, 
+                          item.getPrice());
     }
 }
 }
