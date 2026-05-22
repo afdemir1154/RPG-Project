@@ -90,8 +90,8 @@ public class GM {
         System.out.println("\n\nEnemy Turn!\n");
         
         for (Foe foe : currentEnemies) {
-            if (foe.isAlive()) {
-                System.out.println(foe.name + " Attacks " + hero.name + "!");
+            if (foe.isAlive() && hero.isAlive()) {
+                System.out.println(foe.getName() + " Attacks " + hero.getName() + "!");
                 foe.attack(hero);
                 System.out.println("-------------------------------------------------\n");
             }
@@ -114,11 +114,11 @@ public class GM {
                         throw new DeadCharacterException("There are no alive enemies left to attack!");
                     }
                     Foe target = currentEnemies.get(0);
-                    System.out.println("\n" + hero.getName() + " charges and attacks " + target.name + "!");
+                    System.out.println("\n" + hero.getName() + " charges and attacks " + target.getName() + "!");
                     hero.attack(target);
                     
                     if (!target.isAlive()) {
-                        System.out.println(target.name + " is dead! You earned " + target.getReward() + " coins.");
+                        System.out.println(target.getName() + " is dead! You earned " + target.getReward() + " coins.");
                         hero.addCoin(target.getReward());
                         currentEnemies.remove(target);
                         System.out.println("\n-------------------------------------------------");
@@ -148,7 +148,7 @@ public class GM {
     }
 
     private boolean openInventoryMenu() {
-        System.out.println("\n--- " + hero.name+"'S INVENTORY ---");
+        System.out.println("\n--- " + hero.getName()+"'S INVENTORY ---");
         hero.getInventory().displayItems();
         System.out.print("Enter the number of the item to use/equip (0 to exit): ");
         

@@ -1,7 +1,7 @@
 public abstract class Weapon implements Equipable, Tradeable {
 
-    protected int price;
-    protected double bonusDamage;
+    private final int price;
+    private final double bonusDamage;
 
     public Weapon(int price, double bonusDamage) {
         this.price = price;
@@ -14,9 +14,7 @@ public abstract class Weapon implements Equipable, Tradeable {
     }
 
     @Override
-    public void equip() {
-        System.out.println("Weapon equipped.");
-    }
+    public void equip() {}
 
     @Override
     public int hashCode() {

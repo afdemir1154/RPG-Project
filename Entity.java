@@ -2,10 +2,10 @@ import java.util.Random;
 
 public abstract class Entity {
 
-    protected String name;
-    protected int health;
-    protected double power;
-    protected Random random;
+    private final String name;
+    private int health;
+    private double power;
+    private final Random random;
 
     public Entity(String name, int health, double power) {
         this.name = name;
@@ -46,4 +46,11 @@ public abstract class Entity {
     public boolean isAlive() {
         return health > 0;
     }
+
+    public String getName() { return name; }
+    public int getHealth() { return health; }
+    public void setEntityHealth(int health) { this.health = health; } 
+    public double getPower() { return power; }
+    public void setPower(double power) { this.power = power; }
+    public Random getRandom() { return random; }
 }

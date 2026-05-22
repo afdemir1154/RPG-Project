@@ -10,7 +10,7 @@ public class SmallStrengthPotion extends Potion {
     @Override
     public void use(Entity target) {
 
-        target.power += bonusDamage;
+        target.setPower(target.getPower() + this.bonusDamage);
 
         System.out.println("\n" + this.toString() + " used. " + bonusDamage + " extra damage");
     }

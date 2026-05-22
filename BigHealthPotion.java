@@ -27,7 +27,7 @@ public class BigHealthPotion extends Potion {
             }
         } 
         else {
-            target.health += healAmount;
+            target.takeDamage(-healAmount);
             System.out.println("\n" + this.toString() + " used. " + healAmount + " HP restored.");
         }
     }

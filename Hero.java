@@ -1,11 +1,10 @@
 public class Hero extends Entity {
 
-    
-    protected int coinTotal;
-    protected int maxHealth;
-    protected Weapon equippedWeapon;
-    protected Inventory inventory;
-    protected double maxPower;
+    private int coinTotal;
+    private int maxHealth;
+    private Weapon equippedWeapon;
+    private final Inventory inventory;
+    private double maxPower;
     
     public Hero(String name, int health, double power, int coinTotal, int maxHealth, double maxPower) {
         super(name, health, power);
@@ -17,24 +16,24 @@ public class Hero extends Entity {
 
     @Override
     public void attack(Entity target) {
-        double minDamage = this.power * 0.8;
-        double maxDamage = this.power * 1.2;
+        double minDamage = getPower() * 0.8;
+        double maxDamage = getPower() * 1.2;
 
-        int finalDamage = (int) (minDamage + (random.nextDouble() * (maxDamage - minDamage)));
+        int finalDamage = (int) (minDamage + (getRandom().nextDouble() * (maxDamage - minDamage)));
 
-        boolean isCritical = random.nextInt(100) < 10;
+        boolean isCritical = getRandom().nextInt(100) < 10;
         if (isCritical) {
             finalDamage *= 2;
             System.out.println("HIT RIGHT IN THE HEART!");
         }
 
-        boolean isMiss = random.nextInt(100) < 5;
+        boolean isMiss = getRandom().nextInt(100) < 5;
         if (isMiss) {
             finalDamage = 0;
             System.out.println("MISS");
         }
         
-        System.out.println("" + this.name + " dealt " + finalDamage + " damage to " + target.name);
+        System.out.println(this.getName() + " dealt " + finalDamage + " damage to " + target.getName());
 
         target.takeDamage(finalDamage);
         resetPower();
@@ -46,10 +45,10 @@ public class Hero extends Entity {
         super.takeDamage(amount); 
 
         if (amount > 0) {
-            System.out.println(this.name + " took " + amount + " damage!\n");
+            System.out.println(this.getName() + " took " + amount + " damage!\n");
         }
         else {
-            System.out.println(this.name + " took no damage!\n");
+            System.out.println(this.getName() + " took no damage!\n");
         }
     }
 
@@ -69,40 +68,37 @@ public class Hero extends Entity {
         if (weapon instanceof Weapon weapon1) {
             
             if (this.equippedWeapon != null) {
-                this.power -= this.equippedWeapon.getBonusDamage();
+                this.setPower (getPower() - this.equippedWeapon.getBonusDamage());
                 this.inventory.addItem(this.equippedWeapon);
                 System.out.println(this.equippedWeapon + " unequipped and returned to inventory.");
             }
             
             this.equippedWeapon = weapon1;
             weapon.equip();
-            this.power += this.equippedWeapon.getBonusDamage();
+            this.setPower (getPower() + this.equippedWeapon.getBonusDamage());
             
             this.inventory.removeItem(weapon1);
 
-            this.maxPower = power;
+            this.maxPower = this.getPower();
             
-            System.out.println(this.equippedWeapon + " equipped! New Power: " + this.power);
+            System.out.println("\n" + this.equippedWeapon + " equipped! New Power: " + this.getPower());
         }
     }
 
     // GM ve Shop siniflarinin erisebilmesi icin gerekli Getters/Setters
-    public String getName() { return this.name; }
-    public int getHealth() { return this.health; }
     public int setHealth(int health) { 
         int diff = -1;
         if(health > maxHealth) { 
-            diff = maxHealth - this.health;
-            this.health = maxHealth;
+            diff = this.maxHealth - this.getHealth();
+            this.setHealth(maxHealth);
         }
         else {
-            this.health = health;
+            this.setEntityHealth(health);
         }
         return diff;
     }
-    public double getPower() { return this.power; }
     public void resetPower() {
-        this.power = maxPower;
+        this.setPower(maxPower);
     }
     public int getCoinTotal() { return coinTotal; }
     public void addCoin(int amount) { this.coinTotal += amount; }
@@ -110,6 +106,6 @@ public class Hero extends Entity {
 
     @Override
     public String toString() {
-        return "Hero: " + name + " | HP: " + health + "/" + maxHealth + " | Power: " + power + " | Coin: " + coinTotal;
+        return "Hero: " + this.getName() + " | HP: " + this.getHealth() + "/" + this.maxHealth + " | Power: " + this.getPower() + " | Coin: " + this.coinTotal;
     }
 }
