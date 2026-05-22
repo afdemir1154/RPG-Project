@@ -164,9 +164,21 @@ public class GM {
 
             Tradeable chosenItem = items.get(itemChoice - 1);
 
-            if (chosenItem instanceof Usable potion) {
-                hero.useItem(potion, hero);
-                hero.getInventory().removeItem(chosenItem);
+           if (chosenItem instanceof Usable potion) {
+                if (potion instanceof SmallStrengthPotion || potion instanceof BigStrengthPotion) {
+                    hero.useItem(potion, hero);
+                    hero.getInventory().removeItem(chosenItem);
+                }
+                // Can değişiyor mu 
+                else {
+                    int tempHealth = hero.getHealth();
+                    hero.useItem(potion, hero);
+                    
+                    if (tempHealth != hero.getHealth()) {
+                        // Can değiştiyse kullanılmıştır envanterden sil.
+                        hero.getInventory().removeItem(chosenItem);
+                    }
+                }
             } else if (chosenItem instanceof Equipable weapon) {
                 hero.equipWeapon(weapon);
             }

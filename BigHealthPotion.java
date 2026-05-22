@@ -12,15 +12,15 @@ public class BigHealthPotion extends Potion {
         if (target == null) {
             return; 
         }
-        
+
         if (target instanceof Hero hero) {
-            hero.setHealth(hero.getHealth() + healAmount);
-            if (hero.setHealth(hero.getHealth() + healAmount) != -1 && hero.setHealth(hero.getHealth() + healAmount) != 0) {
-                System.out.println("\n" + this.toString() + " used. " + hero.setHealth(hero.getHealth() + healAmount) + " HP restored.");
-            }
-            else if (hero.setHealth(hero.getHealth() + healAmount) == 0) {
-                System.out.println("\n HP is already full. " + this.toString() + " returned to the inventory");
-                hero.inventory.addItem(this);
+            int result = hero.setHealth(hero.getHealth() + healAmount);
+
+            if (result == 0) {
+                System.out.println("\nHP is already full. " + this.toString() + " kept in the inventory.");
+            } 
+            else if (result != -1) {
+                System.out.println("\n" + this.toString() + " used. " + result + " HP restored.");
             } 
             else {
                 System.out.println("\n" + this.toString() + " used. " + healAmount + " HP restored.");
