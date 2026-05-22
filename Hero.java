@@ -15,32 +15,6 @@ public class Hero extends Entity {
     }
 
     @Override
-    public void attack(Entity target) {
-        double minDamage = getPower() * 0.8;
-        double maxDamage = getPower() * 1.2;
-
-        int finalDamage = (int) (minDamage + (getRandom().nextDouble() * (maxDamage - minDamage)));
-
-        boolean isCritical = getRandom().nextInt(100) < 10;
-        if (isCritical) {
-            finalDamage *= 2;
-            System.out.println("HIT RIGHT IN THE HEART!");
-        }
-
-        boolean isMiss = getRandom().nextInt(100) < 5;
-        if (isMiss) {
-            finalDamage = 0;
-            System.out.println("MISS");
-        }
-        
-        System.out.println(this.getName() + " dealt " + finalDamage + " damage to " + target.getName());
-
-        target.takeDamage(finalDamage);
-        resetPower();
-    }
-
-
-    @Override
     public void takeDamage(int amount) {
         super.takeDamage(amount); 
 
