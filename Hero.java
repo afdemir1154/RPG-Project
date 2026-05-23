@@ -64,7 +64,7 @@ public class Hero extends Entity {
         int diff = -1;
         if(health > maxHealth) { 
             diff = this.maxHealth - this.getHealth();
-            this.setHealth(maxHealth);
+            this.setEntityHealth(maxHealth);
         }
         else {
             this.setEntityHealth(health);
