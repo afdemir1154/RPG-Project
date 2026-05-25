@@ -31,12 +31,13 @@ public class InventoryManager {
             if (potion instanceof SmallStrengthPotion || potion instanceof BigStrengthPotion) {
                 hero.useItem(potion, hero);
                 hero.getInventory().removeItem(chosenItem);
-            } else {
+            } else if (potion instanceof SmallHealthPotion || potion instanceof BigHealthPotion) {
+                //iksir kullanıldı mı yoksa can full müydü kontrolü
                 int tempHealth = hero.getHealth();
                 hero.useItem(potion, hero);
                 
                 if (tempHealth != hero.getHealth()) {
-                    hero.getInventory().removeItem(chosenItem);
+                    hero.getInventory().removeItem(chosenItem);//kullanıldıysa potion envanterden silinsin
                 }
             }
         } else if (chosenItem instanceof Equipable weapon) {

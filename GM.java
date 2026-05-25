@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class GM {
+public class GM {//GM 4 managera bölündü
     private final Hero hero;
     private final Shop shop;
     private final ArrayList<Foe> currentEnemies;
@@ -40,6 +40,7 @@ public class GM {
                 gameOver();
                 isGameOver = true;
             } else if (currentEnemies.isEmpty()) {
+                //wave sistemi oyunun akışını kontrol ediyor ve bir düşman öldükten sonra yenisini getiriyor
                 if (wave < 5) {
                     wave++;
                     switch (wave) {
@@ -102,7 +103,7 @@ public class GM {
 
     private boolean handleMenuInput() {
         String choice = ui.getMainMenuChoice();
-
+        //Arayüzden input alarak aksiyona çeviren motor
         switch (choice) {
             case "1" -> {
                 try {

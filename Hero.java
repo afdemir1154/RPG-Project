@@ -1,7 +1,7 @@
 public class Hero extends Entity {
 
     private int coinTotal;
-    private int maxHealth;
+    private int maxHealth;//ileride level sistemi veya perma health boostları eklenebileceği için final yapılmadı
     private Weapon equippedWeapon;
     private final Inventory inventory;
     private double maxPower;
@@ -48,7 +48,7 @@ public class Hero extends Entity {
     }
 
     // GM ve Shop siniflarinin erisebilmesi icin gerekli Getters/Setters
-    public int setHealth(int health) { 
+    public int setHealth(int health) { //can basınca maxhealth sınırını aşmasın diye
         int diff = -1;
         if(health > maxHealth) { 
             diff = this.maxHealth - this.getHealth();

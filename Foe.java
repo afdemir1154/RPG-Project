@@ -8,7 +8,7 @@ public abstract class Foe extends Entity {
         // Temel ödül (gücün 3 katı)
         int baseReward = (int) (this.getPower() * 3);
         
-        // Ödül miktarı %80 ile %120 arasında olsun
+        // Varyasyon için ödül miktarı base ödülün %80'i ile %120'si arasında olsun
         int minReward = (int) (baseReward * 0.8);
         int maxReward = (int) (baseReward * 1.3);
         

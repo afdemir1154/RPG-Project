@@ -14,6 +14,7 @@ public class BigHealthPotion extends Potion {
         }
 
         if (target instanceof Hero hero) {
+            //iksirin ne kadarı kullanıldıysa o kadar yazdır, kullanılmadıysa envanterde tutulduğunu belirt
             int result = hero.setHealth(hero.getHealth() + healAmount);
 
             if (result == 0) {
@@ -27,6 +28,7 @@ public class BigHealthPotion extends Potion {
             }
         } 
         else {
+            //Hero dışı için heal (şu an kullanılmadığı için ilkel kaldı)
             target.takeDamage(-healAmount);
             System.out.println("\n" + this.toString() + " used. " + healAmount + " HP restored.");
         }

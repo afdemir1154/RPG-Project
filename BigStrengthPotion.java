@@ -21,5 +21,5 @@ public class BigStrengthPotion extends Potion {
     }
     public double getBonusDamage() {
     return this.bonusDamage;
-}
+    }
 }

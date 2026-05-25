@@ -1,13 +1,13 @@
 import java.util.Scanner;
 
-public class UIManager {
+public class UIManager {//UI handling managerı
     private final Scanner scanner;
 
     public UIManager() {
         this.scanner = new Scanner(System.in);
     }
 
-    // Ana menüyü gösterir ve oyuncunun seçimini String olarak döndürür
+    // Ana menüyü gösterir ve oyuncunun seçimini string döndürür
     public String getMainMenuChoice() {
         System.out.println("What would you like to do?");
         System.out.println("1. Attack");
@@ -17,7 +17,7 @@ public class UIManager {
         return scanner.nextLine().trim();
     }
 
-    // Oyuncudan güvenli bir şekilde sayı (int) alır
+    // Oyuncudan input alır
     public int getNumberInput(String prompt) {
         System.out.print(prompt);
         try {
@@ -27,17 +27,17 @@ public class UIManager {
         }
     }
 
-    // Sadece ekrana mesaj basmak için sarmalayıcı (wrapper) metot
+    //Print metodu 
     public void showMessage(String message) {
         System.out.println(message);
     }
 
-    // Oyunu belirtilen süre kadar duraklatır
+    // Oyunu belirtilen süre kadar duraklatır (Yazıların daha oyunvari akması için kullanıldı)
     public void pause(int milliseconds) {
         try {
             Thread.sleep(milliseconds);
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt(); // Hata durumunda thread'i güvenli sonlandırır
+            Thread.currentThread().interrupt(); // Hata kontrolü
         }
 }
 }

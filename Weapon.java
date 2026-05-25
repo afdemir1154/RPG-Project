@@ -16,7 +16,7 @@ public abstract class Weapon implements Equipable, Tradeable {
     @Override
     public void equip() {}
 
-    @Override
+    @Override //içerikleri aynıysa hashcodeları da aynı olmak zorunda bu yüzden beraber kullandık
     public int hashCode() {
         final int prime = 31;
         int result = 1;

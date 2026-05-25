@@ -1,4 +1,4 @@
-public abstract class Entity {
+public abstract class Entity {//Encapsulation adına neredeyse her şeyi private yapıp setter ve getterlarla eriştik
 
     private final String name;
     private int health;
@@ -21,7 +21,7 @@ public abstract class Entity {
     public boolean isAlive() {
         return health > 0;
     }
-
+//setter ve getter fonksiyonları
     public String getName() { return name; }
     public int getHealth() { return health; }
     protected void setEntityHealth(int health) { this.health = health; } //Sadece çocukların kullanmasını istiyoruz 
