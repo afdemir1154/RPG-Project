@@ -1,6 +1,6 @@
 public class Ghoul extends Foe {
 
     public Ghoul() {
-        super("Ghoul", 90, 18);
+        super("Ghoul", 75, 14);
     }
 }

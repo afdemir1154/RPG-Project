@@ -14,18 +14,6 @@ public class Hero extends Entity {
         this.inventory = new Inventory();
     }
 
-    @Override
-    public void takeDamage(int amount) {
-        super.takeDamage(amount); 
-
-        if (amount > 0) {
-            System.out.println(this.getName() + " took " + amount + " damage!\n");
-        }
-        else {
-            System.out.println(this.getName() + " took no damage!\n");
-        }
-    }
-
     public boolean spendCoin(int amount) {
         if (coinTotal >= amount) {
             coinTotal -= amount;

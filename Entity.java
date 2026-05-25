@@ -24,7 +24,7 @@ public abstract class Entity {
 
     public String getName() { return name; }
     public int getHealth() { return health; }
-    public void setEntityHealth(int health) { this.health = health; } 
+    protected void setEntityHealth(int health) { this.health = health; } //Sadece çocukların kullanmasını istiyoruz 
     public double getPower() { return power; }
     public void setPower(double power) { this.power = power; }
 }

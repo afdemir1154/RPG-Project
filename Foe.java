@@ -5,8 +5,8 @@ public abstract class Foe extends Entity {
     }
 
     public int getReward() {
-        // Temel ödül (gücün 2 katı)
-        int baseReward = (int) (getPower() * 2);
+        // Temel ödül (gücün 3 katı)
+        int baseReward = (int) (this.getPower() * 3);
         
         // Ödül miktarı %80 ile %120 arasında olsun
         int minReward = (int) (baseReward * 0.8);

@@ -14,23 +14,24 @@ public class CombatManager {
         double maxDamage = attacker.getPower() * 1.2;
 
         int finalDamage = (int) (minDamage + (random.nextDouble() * (maxDamage - minDamage)));
-        // Crit şansı %10
-        boolean isCritical = random.nextInt(100) < 10;
-        if (isCritical) {
-            finalDamage *= 2;
-            ui.showMessage("HIT RIGHT IN THE HEART!");
-        }
 
-        // Iska şansı %5
-        boolean isMiss = random.nextInt(100) < 5;
-        if (isMiss) {
+        ui.showMessage(attacker.getName() + " attacks");
+        
+        int roll = random.nextInt(100); // 0 ile 99 arası tek bir zar
+        
+        if (roll < 5) {
+            //%5 Miss
             finalDamage = 0;
             ui.showMessage(attacker.getName() + " swung wildly and MISSED!");
-        }
-
-        if (!isMiss) {
+        } else if (roll >= 5 && roll < 15) {
+            //%10 Crit
+            finalDamage *= 2;
+            ui.showMessage("HIT RIGHT IN THE HEART!");
             ui.showMessage(attacker.getName() + " dealt " + finalDamage + " damage to " + target.getName() + ".");
-        }
+        } else {
+            //%85 Normal Vuruş
+            ui.showMessage(attacker.getName() + " dealt " + finalDamage + " damage to " + target.getName() + ".");
+}
         
         target.takeDamage(finalDamage);
     }

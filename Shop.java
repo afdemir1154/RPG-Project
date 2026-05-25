@@ -10,12 +10,16 @@ public class Shop {
         stock.add(new SmallHealthPotion());
         stock.add(new SmallHealthPotion());
         stock.add(new SmallHealthPotion());
+        stock.add(new SmallHealthPotion());
+        stock.add(new BigHealthPotion());
         stock.add(new BigHealthPotion());
         stock.add(new BigHealthPotion());
         stock.add(new BigHealthPotion());
         stock.add(new SmallStrengthPotion());
         stock.add(new SmallStrengthPotion());
         stock.add(new SmallStrengthPotion());
+        stock.add(new SmallStrengthPotion());
+        stock.add(new BigStrengthPotion());
         stock.add(new BigStrengthPotion());
         stock.add(new BigStrengthPotion());
         stock.add(new BigStrengthPotion());
@@ -42,7 +46,8 @@ public class Shop {
         }
     }
 
-public void displayShop() {
+public void displayShop(Hero hero) {
+    System.out.println("\nYou Have " + hero.getCoinTotal() + " Coins");
     System.out.println("\n      SHOP STOCK                    EFFECT                          PRICE");
     System.out.println(" ============================================================================== ");
     if (stock.isEmpty()) {
@@ -77,7 +82,7 @@ public void displayShop() {
             statInfo = "[Damage: +" + strPotion.getBonusDamage() + "]";
         }
 
-        System.out.printf("%2d. %-27s %-29s  Price: %3d Coin\n", 
+        System.out.printf("%2d. %-27s %-29s  Price: %3d Coins\n", 
                           (i + 1), 
                           item.toString(), 
                           statInfo, 

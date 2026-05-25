@@ -10,7 +10,7 @@ public class GM {
     private int wave = 1; 
 
     public GM() {
-        this.hero = new Hero("FF", 100, 15.0, 50, 100, 15.0);
+        this.hero = new Hero("Fufa", 100, 20.0, 50, 100, 20.0);
         this.shop = new Shop();
         this.currentEnemies = new ArrayList<>();
         this.ui = new UIManager();
@@ -18,7 +18,7 @@ public class GM {
         this.inventoryManager = new InventoryManager(this.ui);
 
         ui.showMessage("----------- Your Adventure Has Begun! -----------");
-        ui.showMessage("\n!!! A measly goblin stops you !!!\n");
+        ui.showMessage("\n\n!!! A measly goblin stops you !!!\n");
         currentEnemies.add(new Goblin());
     }
 
@@ -26,6 +26,7 @@ public class GM {
         boolean isGameOver = false;
         
         while (!isGameOver) {
+            ui.pause(1000);
             ui.showMessage(hero.toString());
             ui.showMessage(currentEnemies.toString());
             
@@ -43,19 +44,27 @@ public class GM {
                     wave++;
                     switch (wave) {
                         case 2 -> {
+                            ui.pause(1000);
                             ui.showMessage("\n!!! A ghoul lurks in the dark !!!\n");
+                            ui.pause(1000);
                             currentEnemies.add(new Ghoul());
                         }
                         case 3 -> {
+                            ui.pause(1000);
                             ui.showMessage("\n!!! A witch is approaching !!!\n");
+                            ui.pause(1000);
                             currentEnemies.add(new Witch());
                         }
                         case 4 -> {
+                            ui.pause(1000);
                             ui.showMessage("\n!!! IS THAT A CYCLOPS??? !!!\n");
+                            ui.pause(1000);
                             currentEnemies.add(new Cyclops());
                         }
                         case 5 -> {
+                            ui.pause(1000);
                             ui.showMessage("!!! Medusa... !!!\n");
+                            ui.pause(1000);
                             currentEnemies.add(new Medusa());
                         }
                     }
@@ -70,7 +79,7 @@ public class GM {
         }
     }
 
-    public void heroTurn() { 
+    private void heroTurn() { 
         boolean actionTaken = false;
         while (!actionTaken) {
             ui.showMessage("\nYour Turn!");
@@ -78,18 +87,20 @@ public class GM {
         }
     }
 
-    public void enemyTurn() {
-        ui.showMessage("\n\nEnemy Turn!\n");
+    private void enemyTurn() {
+        ui.showMessage("\n-------------------------------------------------\n");
+        ui.showMessage("Enemy Turn!\n");
+        ui.pause(2000);
     
         for (Foe foe : currentEnemies) {
             if (foe.isAlive() && hero.isAlive()) {
                 combat.executeAttack(foe, hero);
-                ui.showMessage("-------------------------------------------------\n");
+                ui.showMessage("\n-------------------------------------------------\n");
             }
         }
     }
 
-    public boolean handleMenuInput() {
+    private boolean handleMenuInput() {
         String choice = ui.getMainMenuChoice();
 
         switch (choice) {
@@ -100,6 +111,8 @@ public class GM {
                     }
                     Foe target = currentEnemies.get(0);
                     ui.showMessage("\n" + hero.getName() + " charges at " + target.getName() + "!");
+
+                    ui.pause(1000);
 
                     combat.executeAttack(hero, target);
 
@@ -135,7 +148,7 @@ public class GM {
     }
 
     private void openShopMenu() {
-        shop.displayShop();
+        shop.displayShop(hero);
         int shopChoice = ui.getNumberInput("Enter item number to buy (0 to Exit): ");
         
         if (shopChoice == 0) return;
@@ -151,7 +164,7 @@ public class GM {
         }
     }
 
-    public void gameOver() {
+    private void gameOver() {
         ui.showMessage("\n=== GAME OVER ===");
         ui.showMessage("Our hero " + hero.getName() + " could not withstand their wounds and succumbed...");
     }

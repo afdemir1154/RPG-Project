@@ -42,8 +42,9 @@ public class InventoryManager {
         } else if (chosenItem instanceof Equipable weapon) {
             hero.equipWeapon(weapon);
         }
-        
+        ui.pause(1000);
         ui.showMessage("\n--- Updated Status ---");
+        ui.pause(1000);
         ui.showMessage(hero.toString());
         
         return false; 

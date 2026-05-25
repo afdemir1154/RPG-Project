@@ -1,6 +1,6 @@
 public class Medusa extends Foe {
 
     public Medusa() {
-        super("Medusa", 120, 25);
+        super("Medusa", 200, 28);
     }
 }

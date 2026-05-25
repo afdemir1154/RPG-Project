@@ -31,4 +31,13 @@ public class UIManager {
     public void showMessage(String message) {
         System.out.println(message);
     }
+
+    // Oyunu belirtilen süre kadar duraklatır
+    public void pause(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Hata durumunda thread'i güvenli sonlandırır
+        }
+}
 }
