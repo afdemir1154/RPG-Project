@@ -1,4 +1,4 @@
 public interface Equipable {
 
-    void equip();
+    public void equip();
 }

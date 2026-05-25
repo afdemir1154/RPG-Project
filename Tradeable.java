@@ -1,5 +1,5 @@
 public interface Tradeable {
 
-    int getPrice();
+    public int getPrice();
    
 }

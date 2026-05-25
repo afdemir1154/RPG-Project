@@ -1,4 +1,4 @@
 public interface Usable {
 
-    void use(Entity target);
+    public void use(Entity target);
 }
