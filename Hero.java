@@ -41,14 +41,14 @@ public class Hero extends Entity {
             
             this.inventory.removeItem(weapon1);
 
-            this.maxPower = this.getPower();
+            this.maxPower = this.getPower();//weapon kuşanmak maxpowerı artırıyor güç iksirlerinin etkisi ise tek turluk
             
             System.out.println("\n" + this.equippedWeapon + " equipped! New Power: " + this.getPower());
         }
     }
 
     // GM ve Shop siniflarinin erisebilmesi icin gerekli Getters/Setters
-    public int setHealth(int health) { //can basınca maxhealth sınırını aşmasın diye
+    public int setHealth(int health) { //can basınca maxhealth sınırını aşmasın diye kullanılıyor
         int diff = -1;
         if(health > maxHealth) { 
             diff = this.maxHealth - this.getHealth();
@@ -59,7 +59,7 @@ public class Hero extends Entity {
         }
         return diff;
     }
-    public void resetPower() {
+    public void resetPower() {//potion alınan tur güç artıyor sonraki tur etkisi geçiyor
         this.setPower(maxPower);
     }
     public int getCoinTotal() { return coinTotal; }

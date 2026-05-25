@@ -117,7 +117,7 @@ public class GM {//GM 4 managera bölündü
 
                     combat.executeAttack(hero, target);
 
-                    hero.resetPower(); 
+                    hero.resetPower(); //hero atak yaptıktan sonra potion etkisini geçirmek için gücü tekrardan eskiye döndürüyor
 
                     if (!target.isAlive()) {
                         ui.showMessage(target.getName() + " is dead meat! You earned " + target.getReward() + " coins.");
